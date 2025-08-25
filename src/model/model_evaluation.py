@@ -10,7 +10,7 @@ import dagshub
 import os
 from src.logger import logging
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")  # local MLflow server
+mlflow.set_tracking_uri("file:./mlruns") # local MLflow server
 mlflow.set_experiment("capstone_experiment")
 
 

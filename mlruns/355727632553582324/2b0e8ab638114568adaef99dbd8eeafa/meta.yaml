@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/355727632553582324/2b0e8ab638114568adaef99dbd8eeafa/artifacts
+end_time: 1756033673273
+entry_point_name: ''
+experiment_id: '355727632553582324'
+lifecycle_stage: active
+run_id: 2b0e8ab638114568adaef99dbd8eeafa
+run_name: sneaky-shrike-360
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756033669217
+status: 3
+tags: []
+user_id: Asus

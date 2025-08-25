@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/355727632553582324/2bec25af3b3d4a98889b3d493a2cfeaa/artifacts
+end_time: 1756125995794
+entry_point_name: ''
+experiment_id: '355727632553582324'
+lifecycle_stage: active
+run_id: 2bec25af3b3d4a98889b3d493a2cfeaa
+run_name: glamorous-gull-997
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756125991659
+status: 3
+tags: []
+user_id: Asus

@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/355727632553582324/99981b5549734697a9a067cbf21ab986/artifacts
+end_time: 1756033634682
+entry_point_name: ''
+experiment_id: '355727632553582324'
+lifecycle_stage: active
+run_id: 99981b5549734697a9a067cbf21ab986
+run_name: whimsical-boar-430
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756033628960
+status: 3
+tags: []
+user_id: Asus

@@ -92,3 +92,5 @@ local_s3/
 myenv/
 notebooks/mlruns/
 notebooks/IMDB.csv
+data.csv
+data/

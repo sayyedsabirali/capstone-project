@@ -10,9 +10,21 @@ import dagshub
 import os
 from src.logger import logging
 
-mlflow.set_tracking_uri("file:./mlruns") # local MLflow server
-mlflow.set_experiment("capstone_experiment")
+# mlflow.set_tracking_uri("file:./mlruns") # local MLflow server
+# mlflow.set_experiment("capstone_experiment")
 
+dagshub_token = os.getenv("CAPSTONE_TEST")
+if not dagshub_token:
+    raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
+
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
+dagshub_url = "https://dagshub.com"
+repo_owner = "sayyedsabirali"
+repo_name = "capstone-project"
+# Set up MLflow tracking URI
+mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
 
 def load_model(file_path: str):

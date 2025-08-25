@@ -1,6 +1,0 @@
-artifact_location: mlflow-artifacts:/355727632553582324
-creation_time: 1756033628780
-experiment_id: '355727632553582324'
-last_update_time: 1756033628780
-lifecycle_stage: active
-name: my-dvc-pipeline

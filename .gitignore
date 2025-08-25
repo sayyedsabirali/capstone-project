@@ -93,4 +93,7 @@ myenv/
 notebooks/mlruns/
 notebooks/IMDB.csv
 data.csv
-data/
+
+.logs
+mlruns/
+mlartifacts/

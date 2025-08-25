@@ -10,26 +10,6 @@ import dagshub
 import os
 from src.logger import logging
 
-
-# dagshub_token = os.getenv("CAPSTONE_TEST")
-# if not dagshub_token:
-#     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
-
-# os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-# os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
-
-# dagshub_url = "https://dagshub.com"
-# repo_owner = "vikashdas770"
-# repo_name = "YT-Capstone-Project"
-
-# # Set up MLflow tracking URI
-# mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
-
-# Below code block is for local use
-
-# mlflow.set_tracking_uri('https://dagshub.com/sayyedsabirali/capstone-project.mlflow')
-# dagshub.init(repo_owner='sayyedsabirali', repo_name='capstone-project', mlflow=True)
-
 mlflow.set_tracking_uri("http://127.0.0.1:5000")  # local MLflow server
 mlflow.set_experiment("capstone_experiment")
 
@@ -124,18 +104,33 @@ def main():
             for metric_name, metric_value in metrics.items():
                 mlflow.log_metric(metric_name, metric_value)
             
-            # Log model parameters to MLflow
             if hasattr(clf, 'get_params'):
-                params = clf.get_params()
-                for param_name, param_value in params.items():
-                    mlflow.log_param(param_name, param_value)
-            
-            # Log model to MLflow
-            mlflow.sklearn.log_model(clf, name="model")
-            
+                mlflow.log_params(clf.get_params())
+
+            # --- START: NEW CODE FOR MODEL REGISTRATION ---
+
+            # Step 1: Model ko pehle ek artifact ki tarah log karein
+            print("Step 1: Logging model as an artifact...")
+            model_info = mlflow.sklearn.log_model(
+                sk_model=clf,
+                artifact_path="model_artifact" # Folder jahan model save hoga
+            )
+            print("Model logged as artifact successfully.")
+
+            # Step 2: Logged artifact ko Model Registry mein register karein
+            print("Step 2: Registering the model...")
+            model_uri = model_info.model_uri
+            registered_model_version = mlflow.register_model(
+                model_uri=model_uri,
+                name="my_model"  # Yeh naam Model Registry mein dikhega
+            )
+            print(f"Model '{registered_model_version.name}' version '{registered_model_version.version}' registered successfully.")
+
+            # --- END: NEW CODE FOR MODEL REGISTRATION ---
+
             # Save model info
             save_model_info(run.info.run_id, "model", 'reports/experiment_info.json')
-            
+
             # Log the metrics file to MLflow
             mlflow.log_artifact('reports/metrics.json')
 

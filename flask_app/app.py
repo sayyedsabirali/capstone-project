@@ -74,6 +74,8 @@ def normalize_text(text):
 # mlflow.set_tracking_uri("http://127.0.0.1:5000")  # local MLflow server
 # mlflow.set_experiment("capstone_experiment")
 
+from dotenv import load_dotenv
+load_dotenv()
 dagshub_token = os.getenv("CAPSTONE_TEST")
 if not dagshub_token:
     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
@@ -86,7 +88,6 @@ repo_owner = "sayyedsabirali"
 repo_name = "capstone-project"
 # Set up MLflow tracking URI
 mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
-# # -------------------------------------------------------------------------------------
 
 
 # Initialize Flask app
@@ -113,9 +114,9 @@ PREDICTION_COUNT = Counter(
 model_name = "my_model"
 def get_latest_model_version(model_name):
     client = mlflow.MlflowClient()
-    latest_version = client.get_latest_versions(model_name, stages=["Production"])
+    latest_version = client.get_latest_versions(model_name)
     if not latest_version:
-        latest_version = client.get_latest_versions(model_name, stages=["None"])
+        latest_version = client.get_latest_versions(model_name)
     return latest_version[0].version if latest_version else None
 
 model_version = get_latest_model_version(model_name)

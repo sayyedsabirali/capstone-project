@@ -10,8 +10,12 @@ import dagshub
 import os
 from src.logger import logging
 
-# mlflow.set_tracking_uri("file:./mlruns") # local MLflow server
+# mlflow.set_tracking_uri("http://127.0.0.1:5000") # local MLflow server
 # mlflow.set_experiment("capstone_experiment")
+
+# mlflow.set_tracking_uri('https://dagshub.com/sayyedsabirali/capstone-project.mlflow')
+# dagshub.init(repo_owner='sayyedsabirali', repo_name='capstone-project', mlflow=True)
+
 from dotenv import load_dotenv
 load_dotenv()
 dagshub_token = os.getenv("CAPSTONE_TEST")
@@ -120,9 +124,6 @@ def main():
             if hasattr(clf, 'get_params'):
                 mlflow.log_params(clf.get_params())
 
-            # --- START: NEW CODE FOR MODEL REGISTRATION ---
-
-            # Step 1: Model ko pehle ek artifact ki tarah log karein
             print("Step 1: Logging model as an artifact...")
             model_info = mlflow.sklearn.log_model(
                 sk_model=clf,

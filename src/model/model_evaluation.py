@@ -12,7 +12,8 @@ from src.logger import logging
 
 # mlflow.set_tracking_uri("file:./mlruns") # local MLflow server
 # mlflow.set_experiment("capstone_experiment")
-
+from dotenv import load_dotenv
+load_dotenv()
 dagshub_token = os.getenv("CAPSTONE_TEST")
 if not dagshub_token:
     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")

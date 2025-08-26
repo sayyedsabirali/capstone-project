@@ -9,4 +9,5 @@ model_uri = f"runs:/{run_id}/model"
 
 # Load the model back
 loaded_model = mlflow.sklearn.load_model(model_uri)
-print(loaded_model)
+# print(loaded_model)
+

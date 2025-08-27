@@ -1,0 +1,23 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: flask-app-cluster
+  region: us-east-1
+  version: "1.27"
+
+nodeGroups:
+  - name: flask-app-nodes
+    instanceType: t3.small
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 1
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        externalDNS: true
+        certManager: true
+
+
+# Create the cluster by using the command 
+# eksctl create cluster -f cluster.yaml

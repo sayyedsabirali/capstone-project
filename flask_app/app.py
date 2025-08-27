@@ -134,12 +134,15 @@ def home():
     REQUEST_LATENCY.labels(endpoint="/").observe(time.time() - start_time)
     return response
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["GET","POST"])
 def predict():
     REQUEST_COUNT.labels(method="POST", endpoint="/predict").inc()
     start_time = time.time()
-
-    text = request.form["text"]
+    if request.method == "POST":
+        text = request.form.get("text", "")
+    else:
+        text = request.args.get("text", "")
+    
     # Clean text
     text = normalize_text(text)
     # Convert to features

@@ -1,149 +1,138 @@
-# Sentiment Analysis MLOps Project
+Sentiment Analysis MLOps Project
+🎯 Project Purpose
+This project predicts the sentiment of a given text input as either Positive or Negative.
 
-**Project Purpose:**  
-Predicts the sentiment of text input as **Positive** or **Negative**.
+📝 Project Overview
+This project is designed to learn and integrate key MLOps concepts, including DVC, MLflow, AWS, Docker, Kubernetes, Prometheus, and Grafana. Users can input text through a Flask web interface, and the machine learning model will predict the sentiment. The project demonstrates a complete end-to-end deployment pipeline, from local development to a monitored cloud deployment on Amazon EKS.
 
----
+🛠️ Technologies Used
+Programming Language: Python 3.11.4
 
-## Project Overview
-This project is designed to **learn and integrate MLOps concepts** such as **DVC, MLflow, AWS, Docker, Kubernetes, Prometheus, Grafana**, and experiment tracking. Users input text, and the ML model predicts sentiment via a **Flask web interface**. The project also demonstrates an end-to-end deployment pipeline from local development to cloud deployment on EKS with monitoring.
+Libraries & Tools: Pandas, NLTK, Flask, DVC, MLflow, Prometheus, Grafana
 
----
+Deployment & Infrastructure: Docker, Kubernetes, AWS (EKS, S3, ECR)
 
-## Technologies Used
-- **Programming Language:** Python 3.11.4  
-- **Libraries & Tools:** Pandas, NLTK, Flask, DVC, MLflow, Prometheus, Grafana  
-- **Deployment & Infrastructure:** Docker, Kubernetes, AWS (EKS, S3, ECR)  
+📁 Project Structure
+.
+├── flask_app/         # Flask application source code
+├── src/               # ML source code (data ingestion, preprocessing, modeling, evaluation)
+├── tests/             # Test scripts for CI/CD
+├── scripts/           # Utility scripts
+├── .github/workflows/ # CI/CD pipeline configuration
+├── dvc.yaml           # DVC pipeline definition
+├── params.yaml        # Pipeline parameters
+└── requirements.txt   # Python dependencies
 
----
+🚀 Installation & Prerequisites
+Clone the repository:
 
-## Project Structure
-flask_app/ # Flask application
-src/ # Source code (data ingestion, preprocessing, modeling, evaluation)
-dvc.yaml # DVC pipeline
-params.yaml # Pipeline parameters
-requirements.txt # Python dependencies
-tests/ # Test scripts for CI/CD
-scripts/ # Utility scripts
-.github/workflows/ # CI/CD pipeline configuration
+git clone <your-repository-url>
 
-yaml
-Copy code
+Create a virtual environment:
 
----
-
-## Installation & Prerequisites
-1. Clone the repository.  
-2. Create a virtual environment:  
-```bash
 python -m venv atlas
-```
+
 Activate the environment:
 
-```bash
+# On Windows
 atlas\Scripts\activate
-```
+# On macOS/Linux
+source atlas/bin/activate
+
 Install dependencies:
 
-```bash
 pip install -r requirements.txt
-```
-Ensure Docker, Kubernetes, and AWS CLI are installed and configured.
 
-Setup Workflow
+Prerequisites: Ensure Docker, Kubernetes (kubectl), and AWS CLI are installed and configured on your system.
+
+⚙️ Setup Workflow
 1. Project Initialization
-Use Cookiecutter Data Science template.
+Use the Cookiecutter Data Science template.
 
 Rename src.models to src.model.
 
-Initialize git: git add . && git commit -m "Initial commit" && git push.
+Initialize git: git add . && git commit -m "Initial commit" && git push
 
 2. MLflow & DVC Setup
-Connect repository with Dagshub for experiment tracking.
+Connect the repository with DagsHub for experiment tracking.
 
 Install packages: pip install dagshub mlflow.
 
 Run experiments and track metrics using MLflow.
 
-Initialize DVC: dvc init, configure local/remote storage.
+Initialize DVC: dvc init, and configure local/remote storage.
 
-Create DVC pipeline using dvc.yaml and params.yaml.
+Create the DVC pipeline using dvc.yaml and params.yaml.
 
-Reproduce pipeline: dvc repro.
+Reproduce the pipeline: dvc repro.
 
 3. Flask Application
-Create flask_app/ directory and add app file.
+Create the flask_app/ directory and add your app.py file.
 
 Run locally:
 
-bash
-```
 python flask_app/app.py
-```
+
 4. Docker Setup
-Generate requirements for Docker: pipreqs . --force.
+Generate requirements.txt for Docker: pipreqs . --force.
 
-Build Docker image:
+Build the Docker image:
 
-bash
-```
 docker build -t capstone-app:latest .
-```
-Run Docker container:
-```bash
-docker run -p 8888:5000 -e CAPSTONE_TEST=<token> capstone-app:latest
-```
+
+Run the Docker container:
+
+docker run -p 8888:5000 -e CAPSTONE_TEST=<your_token> capstone-app:latest
+
 5. AWS & CI/CD Integration
-Set up AWS credentials and create resources: S3 bucket, ECR repository.
+Set up AWS credentials and create necessary resources: S3 bucket, ECR repository.
 
-Push Docker image to ECR.
+Push the Docker image to ECR.
 
-Configure GitHub Actions CI/CD pipeline for automated deployment.
+Configure the GitHub Actions CI/CD pipeline for automated deployment.
 
 6. Kubernetes (EKS) Deployment
 Install kubectl and eksctl.
 
-Create EKS cluster:
+Create the EKS cluster:
 
-```bash
 eksctl create cluster --name flask-app-cluster --region us-east-1 ...
-```
-Deploy app via CI/CD and verify pods, services, and external IP.
+
+Deploy the application via the CI/CD pipeline and verify pods, services, and the external IP.
 
 7. Monitoring with Prometheus & Grafana
 Launch EC2 instances for Prometheus & Grafana.
 
-Configure Prometheus to scrape Flask app metrics.
+Configure Prometheus to scrape metrics from the Flask application.
 
-Add Prometheus as a data source in Grafana and create dashboards.
+Add Prometheus as a data source in Grafana and create monitoring dashboards.
 
-Running the Application
+▶️ Running the Application
 Locally:
 
-bash
-```
 python flask_app/app.py
-```
+
 On Kubernetes:
 
-```bash
+Apply the deployment configuration:
+
 kubectl apply -f deployment.yaml
-```
-8. Get external-ip
-```bash
+
+Get the external IP of the service:
+
 kubectl get svc
-```
-Access external URL: http://<external-ip>:5000
 
-Demo
-A demo video showcasing the project workflow can be added here:
-[https://drive.google.com/file/d/1Y40cqSpgU7lBtoBCWcZZtTtaXM1H0hFg/view?usp=drive_link]
+Access the application in your browser at http://<external-ip>:5000
 
-Features
-User text input sentiment prediction (Positive / Negative)
+✨ Features
+User text input for sentiment prediction (Positive / Negative).
 
-End-to-end MLOps integration with DVC, MLflow, AWS, Docker, Kubernetes
+End-to-end MLOps integration with DVC, MLflow, AWS, Docker, and Kubernetes.
 
-Monitoring dashboards with Prometheus & Grafana
+Monitoring dashboards with Prometheus & Grafana.
 
-CI/CD pipeline for automated deployment
+Automated CI/CD pipeline for deployment.
+
+🎬 Demo
+A demo video showcasing the project workflow is available here:
+Watch Project Demo
